@@ -33,7 +33,7 @@ const hintContentElem = document.querySelector('.hint-content');
 const hintButton = document.querySelector('.hint-btn'); //
 const restartButton = document.querySelector('.restart-btn'); //Give Up, Restart, Play Again, Reset
 
-const popupContainerElem = document.querySelector('.popup-container') // isOver, popup, popover, gameStatus, gameDialog, 
+const popupContainerElem = document.querySelector('.popup-container') // popup, isOver, gameOver, gameStatus, gameDialog, 
 const popupMsgElem = document.querySelector('.popup-msg');
 const showAnswerElem = document.querySelector('.show-answer');
 const playAgainButton = document.querySelector('.play-again');
@@ -75,7 +75,7 @@ define(["jquery", "fetch", "methods", "modals"], function($, dataset, methods, m
     let mistakes = 0
     let lifespan
     let currentScore
-    let totalScore
+    let totalScore // bestScore, highestScore
     let previousResult = false
     
     // userInputElem.focus()
