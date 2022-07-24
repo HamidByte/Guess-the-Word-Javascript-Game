@@ -121,8 +121,8 @@ header {
     border-radius: 5px;
 }
 .key:hover {
-    background-color: #e75480 !important;
-    border: #e75480 !important;
+    /* background-color: #e75480 !important;
+    border: #e75480 !important; */
 }
 .correct {
     color: #fff;
