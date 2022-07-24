@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Guess the Word Game JavaScript</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <header class="p-5 text-center">
+      <!-- Background image -->
+      <!-- <div class="bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');height: 200px;"> -->
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-white">
+            <h2 class="mb-2 font-weight-bold">JavaScript Hangman Game - Guess the Word</h2>
+            <h5 class="text-uppercase">Libraries and Resources: RequireJS, jQuery, PopperJS, Bootstrap 5, Font Awesome</h5>
+          </div>
+        </div>
+      <!-- </div> -->
+      <!-- Background image -->
+    </header>
+
+    <!-- Game Over Popup -->
+    <div class="popup-container hidden">
+      <div class="popup-content">
+        <h5 class="card-title result-title">Results</h5>
+        <p class="card-text show-answer"></p>
+        <p class="card-text popup-msg"></p>
+        <button type="button" class="btn btn-primary play-again float-end">Play again?</button>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row mb-3">
+      <!-- Left Column -->
+      <div class="flex-fill p-2 left">
+        <div class="row text-center">
+          <div class="col-3">
+            <div class="card w-100">
+              <div class="card-body">
+                <h5 class="card-title">Word Length</h5>
+                <p class="card-text" id="word_length">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card w-100">
+              <div class="card-body">
+                <h5 class="card-title">Your Score</h5>
+                <p class="card-text" id="score">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card w-100">
+              <div class="card-body">
+                <h5 class="card-title">Category</h5>
+                <p class="card-text" id="category"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card w-100 float-end">
+              <div class="card-body">
+                <h5 class="card-title">Your Health</h5>
+                <p class="card-text" id="lifespan">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-12">
+            <div id="word_display" class="word-display"></div>
+          </div>
+        </div>
+        <div class="row mt-5 text-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Keyboard:</h5>
+                <div class="" id="keyboard"></div>
+                <!-- <input type="text" id="get_input" maxlength="1"> -->
+                <p class="card-text">You can also type letters on your PC or laptop's keyboard.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5 text-right">
+          <div class="col-12">
+            <div class="alert alert-success hint-container hidden" role="alert">
+              <p class="hint-content"></p>
+            </div>
+            <div class="float-end">
+              <button class="btn btn-success hint-btn">Hint</button>
+              <button class="btn btn-secondary restart-btn">Give Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Column -->
+      <div class="flex-fill p-2 right">
+        <div class="card text-center h-100">
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
+            <!-- Hangman Animation -->
+            <img id='hangmanImages' src="./img/0.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="mt-auto text-white">
+      <!-- Copyrights -->
+      <div class="py-4">
+        <div class="container text-center">
+          <p class="mb-0 py-2">© 2022 Developed with &hearts; by Hamid</p>
+        </div>
+      </div>
+    <!-- End -->
+    </footer>
+
+    <script data-main="config" src="js/vendor/require-2.3.6.js"></script>
+    <script>
+    require(["config"], function(util) {
+      require(['js/main.js'])
+    })
+    </script>
+
+  </body>
+</html>
