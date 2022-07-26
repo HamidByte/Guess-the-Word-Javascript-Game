@@ -1,4 +1,4 @@
-# Guess the Word Javascript Game 2
+# Guess the Word Javascript Game
 ## The classical hangman puzzle game.
 We have to figure out which is the secret word before the man gets hanged. With each error, the man will be closer to die!
 
