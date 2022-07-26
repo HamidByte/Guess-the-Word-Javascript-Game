@@ -1,18 +1,9 @@
 /*
 Keywords:
-Hangman
-Word, Find, Guess, Fill, Complete, Solve
-Play, IQ, Puzzle
-
-Examples:
-Word Scrabble
-Scrab Word
-Wordle
+Javascript Game, Hangman, Word, Find, Guess, Fill, Complete, Solve, Play, IQ, Puzzle
+Word Scrabble, Scrab Word, Wordle
 
 Description: Fill in the blanks to complete word
-
-Suggestions:
-Guess Fill Find
 */
 
 'use strict';
@@ -38,31 +29,13 @@ const popupMsgElem = document.querySelector('.popup-msg');
 const showAnswerElem = document.querySelector('.show-answer');
 const playAgainButton = document.querySelector('.play-again');
 
-define(["jquery", "fetch", "methods", "modals"], function($, dataset, methods, modals) {
-
-    // $('#test_button').on('click', function() {
-        // modals.gameStatusModal();
-    // })
-     $('.play-again').on('click', function() {
-        init('restart')
-    })
-
-    $('a.modal-trigger').trigger("click")
-    
-    $('a.modal-trigger').click(function(e) {
-        var target = $(this).attr('href');
-        // $(target).addClass('j-modal--open');
-        console.log(target)
-    });
-
+define(["jquery", "fetch", "methods"], function($, dataset, methods) {
     // Test Dataset
     // const dataset = new Map([
     //     ['test', 'a procedure intended to establish the quality, performance, or reliability of something, especially before it is taken into widespread use.'],
     //     ['study', 'the time devoted by a particular person to gaining knowledge of an academic subject, typically at school, college, or university.'],
     //     ['lion', 'a large tawny-coloured cat that lives in prides, found in Africa and north-western India. The male has a flowing shaggy mane and takes little part in hunting, which is done cooperatively by the females.'],
     //   ]);
-    // const wordsList = ['government', 'ostrich', 'history', 'literature', 'knowledge', 'society', 'temperature', 'community', 'management', 'equipment', 'strategy', 'university', 'medicine', 'success', 'moment', 'customer', 'opinion']
-
     // creating a list of words from dataset
     // const wordsList = [...dataset.keys()];
     const wordsList = dataset.map(item => item.word);
@@ -293,19 +266,22 @@ const showNotif = function (msg) {
         isHint = true
     }
   });
-  
-  // listening to reset btn
+
+
+  // Listening to Reset / Give Up button
   restartButton.addEventListener('click', function () {
     previousResult = false
     // display popup again with selected word
     init('restart');
   });
+
   
-  // listening to play again button
+  // $('.play-again').on('click', function() {
+  //   init('restart')
+  // })
+  // Listening to Play Again / Next Word button when a round completed
   playAgainButton.addEventListener('click', function () {
     init('restart');
   });
   
 })
-
-

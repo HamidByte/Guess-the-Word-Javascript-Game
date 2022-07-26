@@ -11,6 +11,7 @@ requirejs.config({
         'plainmodal': 'vendor/plain-modal.min',
         'fetch': ['fetch'],
         'methods': ['methods'],
+        'testData': ['testData'],
     },
     shim: {
         "bootstrap": {

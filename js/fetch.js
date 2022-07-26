@@ -105,9 +105,9 @@ define(["jquery"], function($) {
         },
         {
             id: 17,
-            word: 'ostrich',
-            category: 'animal',
-            hint: 'a flightless swift-running African bird with a long neck, long legs, and two toes on each foot. It is the largest living bird, with males reaching a height of up to 2.75 m.',
+            word: 'ambition',
+            category: 'noun',
+            hint: '',
         },
         {
             id: 18,
@@ -117,9 +117,9 @@ define(["jquery"], function($) {
         },
         {
             id: 19,
-            word: 'tiger',
+            word: 'ostrich',
             category: 'animal',
-            hint: '',
+            hint: 'a flightless swift-running African bird with a long neck, long legs, and two toes on each foot. It is the largest living bird, with males reaching a height of up to 2.75 m.',
         },
         {
             id: 20,
@@ -214,6 +214,12 @@ define(["jquery"], function($) {
         {
             id: 35,
             word: 'crocodile',
+            category: 'animal',
+            hint: '',
+        },
+        {
+            id: 36,
+            word: 'tiger',
             category: 'animal',
             hint: '',
         },
@@ -482,7 +488,7 @@ define(["jquery"], function($) {
             hint: '',
         },
         {
-            id: 71,
+            id: 81,
             word: 'portugal',
             category: 'country',
             hint: '',
