@@ -8,7 +8,6 @@ requirejs.config({
         'fontawesome': 'vendor/fontawesome/fontawesome.min',
         'fontawesome/solid': 'vendor/fontawesome/solid.min',
         'fontawesome/brands': 'vendor/fontawesome/brands.min',
-        'plainmodal': 'vendor/plain-modal.min',
         'fetch': ['fetch'],
         'methods': ['methods'],
         'testData': ['testData'],
@@ -35,9 +34,4 @@ define("initBootstrap", ["popper"], function(popper) {
 // load fontawesome
 require(['fontawesome'], function (fontawesome) {
     // FontAwesome initialization
-})
-
-// load PlainModal
-require(['plainmodal'], function (micromodal) {
-    // PlainModal initialization
 })
