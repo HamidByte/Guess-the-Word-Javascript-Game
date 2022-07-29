@@ -125,6 +125,23 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
           const html = `<span class="blank" style="--i:${i+1}">_</span>`;
           wordDisplayElem.insertAdjacentHTML('beforeend', html);
         }
+
+        // new
+        const findIndexes = [...selectedWord.matchAll(new RegExp("-", 'gi'))].map(a => a.index)
+        console.log(findIndexes)
+      //   for (let i = 0; i < findIndexes.length; i++) {
+      //     updatedBlanks = methods.replaceIndex(updatedBlanks, findIndexes[i], "-")
+      // }
+      findIndexes.forEach((val, i) => {
+        wordDisplayElem.children[val].textContent = "-";
+      });
+      const findIndexes2 = [...selectedWord.matchAll(new RegExp(" ", 'gi'))].map(a => a.index)
+
+    findIndexes2.forEach((val, i) => {
+      wordDisplayElem.children[val].textContent = " ";
+    });
+    // end
+    
       };
 
 /*

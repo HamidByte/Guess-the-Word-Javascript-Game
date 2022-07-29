@@ -729,5 +729,44 @@ define(["jquery"], function($) {
         },
     ]
     
-    return data
+    const test = [
+        {
+            id: 0,
+            word: 'Titanic',
+            category: 'American Film',
+            hint: '',
+        },
+        {
+            id: 1,
+            word: 'The Shawshank Redemption',
+            category: 'American Film',
+            hint: '',
+        },
+        {
+            id: 2,
+            word: 'Spider-Man',
+            category: 'American Film',
+            hint: '',
+        },
+        {
+            id: 3,
+            word: 'The Dark Knight',
+            category: 'American Film',
+            hint: '',
+        },
+        {
+            id: 4,
+            word: 'The Lord of the Rings',
+            category: 'American Film',
+            hint: '',
+        },
+        {
+            id: 5,
+            word: 'The Godfather',
+            category: 'American Film',
+            hint: '',
+        },
+    ]
+
+    return test
 })
