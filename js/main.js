@@ -56,15 +56,6 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
     // userInputElem.addEventListener('change', play)
     // methods.displayBlanks(wordBlanks)
 
-    document.addEventListener("keydown", (e) => {
-        if(popupContainerElem.classList.contains('hidden')) {
-            if(e.key.replace(/[^a-zA-Z]+/g, '')) {
-                // console.log(e.key)
-                $("#" + e.key).click()
-            }
-        }
-    })
-
     // Star game
     init('start');
     
@@ -75,8 +66,8 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
         const selectedWordList = methods.getRandom(wordsList)
         // let selectedId = [...selectedWordList.keys()]
         selectedId = selectedWordList[0]
-        selectedWord = selectedWordList[1]
-        // let selectedWord = methods.getRandom(wordsList)
+        selectedWord = selectedWordList[1].toUpperCase()
+        // let selectedWord = methods.getRandom(wordsList).toUpperCase()
         const wordLength = selectedWord.length // wordCount
         // const wordBlanks = "_".repeat(wordLength) // wordStatus
         // const updatedBlanks = wordBlanks
@@ -91,20 +82,18 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
         if(!previousResult) {
             totalScore = 0
         }
-        
         console.log(selectedWord)
-
         methods.display(WordLengthElem, wordLength)
         methods.display(scoreElem, totalScore)
 
         if (currentState === 'start') {
           for (const i of 'abcdefghijklmnopqrstuvwxyz') {
-            const html = `<button id="${i}" class="btn btn-primary key">${i.toUpperCase()}</button>`;
+            const html = `<button id="${i.toUpperCase()}" class="btn btn-primary key">${i.toUpperCase()}</button>`;
             keyboardElem.insertAdjacentHTML('beforeend', html);
           }
         } else if (currentState === 'restart') {
             keyboardLettersButton.forEach(btn => {
-            btn.classList.remove('disabled', 'correct', 'incorrect');
+            btn.classList.remove('disabled', 'correct', 'incorrect'); // Reset Keyboard
             methods.addClass(hintContainerElem, 'hidden') // Hide Hint
             methods.addClass(popupContainerElem, 'hidden') // Hide Popup
           });
@@ -114,12 +103,8 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
         keyboardLettersButton = document.querySelectorAll('.key');
         
         // lifespanElem.textContent = lifespan;
-        lifespanElem.textContent = '';
-        for (let i = 0; i < lifespan; i++) {
-            const html = `<i class="fa-solid fa-heart"></i>`;
-            lifespanElem.insertAdjacentHTML('beforeend', html)
-          }
-        
+        methods.updateHealth(lifespanElem, lifespan)
+
         // putting selected word
         for (let i = 0; i < selectedWord.length; i++) {
           const html = `<span class="blank" style="--i:${i+1}">_</span>`;
@@ -188,8 +173,6 @@ const showNotif = function (msg) {
         totalScore += 10
         methods.display(scoreElem, totalScore)
     }
-    
-    // lives = 3;
   };
   
   // decrease life
@@ -197,13 +180,8 @@ const showNotif = function (msg) {
     lifespan--;
     mistakes++;
     updateHangmanImage(mistakes);
-    //   console.log(lives);
     // lifespanElem.textContent = lifespan;
-    lifespanElem.textContent = '';
-    for (let i = 0; i < lifespan; i++) {
-        const html = `<i class="fa-solid fa-heart"></i>`;
-        lifespanElem.insertAdjacentHTML('beforeend', html)
-      }
+    methods.updateHealth(lifespanElem, lifespan)
       
     if (lifespan === 0) {
         lifespanElem.textContent = 0;
@@ -243,7 +221,7 @@ const showNotif = function (msg) {
   
   // letters event listener function
   const letterPress = function () {
-    const letter = this.textContent.toLowerCase();
+    const letter = this.textContent;
   
     if (selectedWord.includes(letter)) {
       const indexes_list = getindexes(letter);
@@ -266,39 +244,45 @@ const showNotif = function (msg) {
     this.classList.add('disabled');
   };
   
-  // listening to letter buttons presses
+  // Listening to virtual keyboard's button press
   keyboardLettersButton.forEach(btn => {
     btn.addEventListener('click', letterPress);
-  });
-  
-  // Listening to hint btn
+  })
+
+  // Listening to physical keyboard's button press
+  document.addEventListener("keydown", (event) => {
+    if(methods.lettersOnly(event) && popupContainerElem.classList.contains('hidden')) {
+        // console.log(event.key.toUpperCase())
+        $("#" + event.key.toUpperCase()).click()
+    }
+  })
+
+  // Listening to hint button
   hintButton.addEventListener('click', function () {
     if(isHint) {
         methods.addClass(hintContainerElem, 'hidden') // Hide Hint
         isHint = false
     } else {
         methods.removeClass(hintContainerElem, 'hidden') // Show Hint
-        // hintContentElem.textContent = dataset.get(selectedWord);
-        hintContentElem.textContent = hint;
+        // hintContentElem.textContent = dataset.get(selectedWord)
+        hintContentElem.textContent = hint
         isHint = true
     }
-  });
-
+  })
 
   // Listening to Reset / Give Up button
   restartButton.addEventListener('click', function () {
     previousResult = false
     // display popup again with selected word
-    init('restart');
-  });
+    init('restart')
+  })
 
-  
   // $('.play-again').on('click', function() {
   //   init('restart')
   // })
   // Listening to Play Again / Next Word button when a round completed
   playAgainButton.addEventListener('click', function () {
-    init('restart');
-  });
+    init('restart')
+  })
   
 })
