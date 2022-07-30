@@ -21,7 +21,7 @@ const lifespanElem = document.getElementById("lifespan") // health, lifespan, li
 
 const hintContainerElem = document.querySelector('.hint-container')
 const hintContentElem = document.querySelector('.hint-content');
-const hintButton = document.querySelector('.hint-btn'); //
+const hintButton = document.querySelector('.hint-btn');
 const restartButton = document.querySelector('.restart-btn'); //Give Up, Restart, Play Again, Reset
 
 const popupContainerElem = document.querySelector('.popup-container') // popup, isOver, gameOver, gameStatus, gameDialog, 
@@ -110,6 +110,20 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
           const html = `<span class="blank" style="--i:${i+1}">_</span>`;
           wordDisplayElem.insertAdjacentHTML('beforeend', html);
         }
+
+        // Display spaces and hyphens in blanks
+        let matchedIndices
+        const includeFromWords = [' ', '-']
+        for (let i = 0; i < includeFromWords.length; i++) {
+          matchedIndices = [...selectedWord.matchAll(new RegExp(includeFromWords[i], 'gi'))].map(a => a.index)
+          if(matchedIndices.length > 0 && selectedWord.includes(includeFromWords[i])) {
+            matchedIndices.forEach((val, index) => {
+              wordDisplayElem.children[val].textContent = includeFromWords[i];
+              methods.addClass(wordDisplayElem.children[val], "space")
+            });
+          }
+        }
+    
       };
 
 /*
@@ -117,15 +131,15 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
 **************************************************
 */
     function play() {
-        let findIndex = selectedWord.indexOf(this.value)
-        const findIndexes = [...selectedWord.matchAll(new RegExp(this.value, 'gi'))].map(a => a.index)
+        let matchedIndex = selectedWord.indexOf(this.value)
+        const matchedIndices = [...selectedWord.matchAll(new RegExp(this.value, 'gi'))].map(a => a.index)
         let findMatch = updatedBlanks.includes(this.value)
 
         if(findMatch) {
             alert("Already in the list")
-        } else if(findIndex !== -1) {
-            for (let i = 0; i < findIndexes.length; i++) {
-                updatedBlanks = methods.replaceIndex(updatedBlanks, findIndexes[i], this.value)
+        } else if(matchedIndex !== -1) {
+            for (let i = 0; i < matchedIndices.length; i++) {
+                updatedBlanks = methods.replaceIndex(updatedBlanks, matchedIndices[i], this.value)
             }
             methods.displayBlanks(updatedBlanks)
         } else {
