@@ -99,6 +99,7 @@ header {
 }
 .word-display span {
     position: relative;
+    display: inline-block;
     font-size: 60px;
     color: #ffffff;
     text-transform: uppercase;

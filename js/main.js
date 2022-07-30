@@ -128,7 +128,11 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
           matchedIndices = [...selectedWord.matchAll(new RegExp(includeFromWords[i], 'gi'))].map(a => a.index)
           if(matchedIndices.length > 0 && selectedWord.includes(includeFromWords[i])) {
             matchedIndices.forEach((val, index) => {
-              wordDisplayElem.children[val].textContent = includeFromWords[i];
+              if(includeFromWords[i] === ' ') {
+                wordDisplayElem.children[val].textContent = String.fromCharCode(160);
+              } else {
+                wordDisplayElem.children[val].textContent = includeFromWords[i];
+              }
               methods.addClass(wordDisplayElem.children[val], "space")
             });
           }
