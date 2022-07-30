@@ -95,10 +95,10 @@ header {
 
 .word-display {
     position: relative;
+    display: inline-block;
 }
 .word-display span {
     position: relative;
-    display: inline-block;
     font-size: 60px;
     color: #ffffff;
     text-transform: uppercase;
@@ -111,7 +111,12 @@ header {
     }
 }
 .blank {
-    margin-right: 1.5rem;
+    margin: 0 0.5rem;
+}
+
+.space {
+    padding: 0 0.5rem;
+    /* background-color: #373b52; */
 }
 
 .key {
