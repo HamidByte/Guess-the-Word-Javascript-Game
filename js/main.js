@@ -17,7 +17,7 @@ const keyboardElem = document.getElementById("keyboard")
 const WordLengthElem = document.getElementById("word_length")
 const scoreElem = document.getElementById("score")
 const categoryElem = document.getElementById("category")
-const lifespanElem = document.getElementById("lifespan") // health, lifespan, lives, maxChance, mistakes
+const healthElem = document.getElementById("health") // health, lifespan, lives, maxChance, mistakes
 
 const hintContainerElem = document.querySelector('.hint-container')
 const hintContentElem = document.querySelector('.hint-content');
@@ -38,15 +38,30 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
     //   ]);
     // creating a list of words from dataset
     // const wordsList = [...dataset.keys()];
-    const wordsList = dataset.map(item => item.word);
+    // const wordsList = dataset.map(item => item.word);
+    // const selectedWordList = methods.getRandomList(wordsList)
+    // // let selectedId = [...selectedWordList.keys()]
+    // selectedId = selectedWordList[0]
+    // selectedWord = selectedWordList[1].toUpperCase()
+    // // let selectedWord = methods.getRandomList(wordsList).toUpperCase()
+    // const wordLength = selectedWord.length // wordCount
+    // // const wordBlanks = "_".repeat(wordLength) // wordStatus
+    // // const updatedBlanks = wordBlanks
+    // methods.displayBlanks(wordBlanks)
+    // const findMatchList = dataset.filter(item => item.id === selectedId)
+    // const selectedCategory = methods.titleCase(findMatchList[0].category)
+    // categoryElem.innerHTML = selectedCategory
+    // selectedHint = findMatchList[0].hint
+    // isHint = false
+
     let selectedId
     let selectedWord
-    let hint
+    let selectedHint
     let isHint
     let keyboardLettersButton // keyboard button letters
-    let maxChance = 5
+    let maxChance = 7
     let mistakes = 0
-    let lifespan
+    let health
     let currentScore
     let totalScore // bestScore, highestScore
     let previousResult = false
@@ -54,37 +69,32 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
     // userInputElem.focus()
     // userInputElem.select()
     // userInputElem.addEventListener('change', play)
-    // methods.displayBlanks(wordBlanks)
-
+    
     // Star game
     init('start');
     
     function init(currentState) {
 
         wordDisplayElem.innerHTML = ''
-        document.getElementById('hangmanImages').src = './img/0.jpg';
-        const selectedWordList = methods.getRandom(wordsList)
-        // let selectedId = [...selectedWordList.keys()]
-        selectedId = selectedWordList[0]
-        selectedWord = selectedWordList[1].toUpperCase()
-        // let selectedWord = methods.getRandom(wordsList).toUpperCase()
+        document.getElementById('hangmanImages').src = './img/hangman/0.jpg';
+        const randomProperty = methods.getRandomProperty(dataset)
+        selectedId = randomProperty.id
+        selectedWord = randomProperty.word.toUpperCase()
         const wordLength = selectedWord.length // wordCount
-        // const wordBlanks = "_".repeat(wordLength) // wordStatus
-        // const updatedBlanks = wordBlanks
-        const findMatchList = dataset.filter(item => item.id === selectedId)
-        const category = methods.titleCase(findMatchList[0].category)
-        categoryElem.innerHTML = category
-        hint = findMatchList[0].hint
+        const selectedCategory = randomProperty.category
+        categoryElem.innerHTML = methods.titleCase(selectedCategory)
+        selectedHint = randomProperty.hint
         isHint = false
-        lifespan = maxChance
+        health = maxChance
         mistakes = 0
         currentScore = 0
         if(!previousResult) {
             totalScore = 0
         }
-        console.log(selectedWord)
         methods.display(WordLengthElem, wordLength)
         methods.display(scoreElem, totalScore)
+
+        console.log(selectedWord) //
 
         if (currentState === 'start') {
           for (const i of 'abcdefghijklmnopqrstuvwxyz') {
@@ -102,8 +112,8 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
         // capturing letters div
         keyboardLettersButton = document.querySelectorAll('.key');
         
-        // lifespanElem.textContent = lifespan;
-        methods.updateHealth(lifespanElem, lifespan)
+        // healthElem.textContent = health;
+        methods.updateHealth(healthElem, health)
 
         // putting selected word
         for (let i = 0; i < selectedWord.length; i++) {
@@ -174,21 +184,21 @@ const showNotif = function (msg) {
   
   // decrease life
   const decreaseLife = function () {
-    lifespan--;
+    health--;
     mistakes++;
     updateHangmanImage(mistakes);
-    // lifespanElem.textContent = lifespan;
-    methods.updateHealth(lifespanElem, lifespan)
+    // healthElem.textContent = health;
+    methods.updateHealth(healthElem, health)
       
-    if (lifespan === 0) {
-        lifespanElem.textContent = 0;
+    if (health === 0) {
+      healthElem.textContent = 0;
         previousResult = false
         showNotif('lost');
     }
   };
 
   function updateHangmanImage(mistakes) {
-    document.getElementById('hangmanImages').src = './img/' + mistakes + '.jpg';
+    document.getElementById('hangmanImages').src = './img/hangman/' + mistakes + '.jpg';
   }
 
   // get multiple matching indexes of pressed letter
@@ -262,7 +272,7 @@ const showNotif = function (msg) {
     } else {
         methods.removeClass(hintContainerElem, 'hidden') // Show Hint
         // hintContentElem.textContent = dataset.get(selectedWord)
-        hintContentElem.textContent = hint
+        hintContentElem.textContent = selectedHint
         isHint = true
     }
   })

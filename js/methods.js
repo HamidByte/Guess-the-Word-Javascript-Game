@@ -2,14 +2,33 @@ define(["jquery"], function($) {
     
     let methods = {}
 
-    // Get random list containing id and word
-    methods.getRandom = function(list) {
-        let randomNumber = Math.floor(Math.random() * list.length)
-        // return new Map([
-        //     [randomNumber, list[randomNumber]]
-        // ])
-        return [randomNumber, list[randomNumber]]
+    // // Get random a random number from 0 to size
+    // methods.getRandomNumber = function(size) {
+    //     return Math.floor(Math.random() * size)
+    // }
+
+    // Get a random property from dataset
+    methods.getRandomProperty = function (data) {
+        var keys = Object.keys(data)
+        return data[keys[keys.length * Math.random() << 0]];
     }
+
+    // // Get random list containing id and word
+    // methods.getRandomList = function(list) {
+    //     let randomNumber = Math.floor(Math.random() * list.length)
+    //     // return new Map([
+    //     //     [randomNumber, list[randomNumber]]
+    //     // ])
+    //     return [randomNumber, list[randomNumber]]
+    // }
+
+    methods.titleCase = function(str) {
+        str = str.toLowerCase().split(' ');
+        for (var i = 0; i < str.length; i++) {
+          str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+        }
+        return str.join(' ');
+      }
 
     // Accept letters only
     methods.lettersOnly = function(event) {
@@ -59,19 +78,12 @@ define(["jquery"], function($) {
           }
     }
 
-    methods.replaceIndex = function(string, at, replace) {
-        return string.replace(/\S/g, function(match, i) {
-             if( i === at ) return replace
-             return match
-         })
-     }
-     methods.titleCase = function(str) {
-        str = str.toLowerCase().split(' ');
-        for (var i = 0; i < str.length; i++) {
-          str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
-        }
-        return str.join(' ');
-      }
+    // methods.replaceIndex = function(string, at, replace) {
+    //     return string.replace(/\S/g, function(match, i) {
+    //          if( i === at ) return replace
+    //          return match
+    //      })
+    //  }
 
     return methods
 })
