@@ -1,16 +1,18 @@
 requirejs.config({
-    baseUrl: 'js',
+    baseUrl: '',
     paths: {
-        'jquery': ['vendor/jquery-3.6.0.min'],
-        "popper": "vendor/popper.min",
-        "bootstrap": "vendor/bootstrap/bootstrap.min",
+        'env': 'globals',
+        'jquery': ['js/vendor/jquery-3.6.0.min'],
+        "popper": "js/vendor/popper.min",
+        "bootstrap": "js/vendor/bootstrap/bootstrap.min",
         "initBootstrap": "",
-        'fontawesome': 'vendor/fontawesome/fontawesome.min',
-        'fontawesome/solid': 'vendor/fontawesome/solid.min',
-        'fontawesome/brands': 'vendor/fontawesome/brands.min',
-        'fetch': ['fetch'],
-        'methods': ['methods'],
-        'testData': ['testData'],
+        'fontawesome': 'js/vendor/fontawesome/fontawesome.min',
+        'fontawesome/solid': 'js/vendor/fontawesome/solid.min',
+        'fontawesome/brands': 'js/vendor/fontawesome/brands.min',
+        'fetch': ['js/fetch'],
+        'api': ['js/api'],
+        'methods': ['js/methods'],
+        'testData': ['js/testData'],
     },
     shim: {
         "bootstrap": {
