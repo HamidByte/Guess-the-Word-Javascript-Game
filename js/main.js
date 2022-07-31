@@ -60,7 +60,7 @@ define(["jquery", "fetch", "methods", "api"], function($, dataset, methods, api)
     let isHint
     let keyboardLettersButton // keyboard button letters
     let maxChance = 7
-    let mistakes = 0
+    let mistakes
     let health
     let currentScore
     let totalScore // bestScore, highestScore
@@ -96,15 +96,16 @@ define(["jquery", "fetch", "methods", "api"], function($, dataset, methods, api)
 
         console.log(selectedWord) //
 
-        api.getDictApiData(selectedWord).then(def => {
-          if(def === undefined) {
-            selectedHint = 'Sorry, there is no hint for this word. We will update it very soon.'
-          }
-
-          if (selectedHint === '' && def.length > 0) {
-            selectedHint = def
-          }
-        })
+        if (selectedHint === '') {
+          api.getDictApiData(selectedWord).then(def => {
+            if(def === undefined) {
+              selectedHint = 'Sorry, there is no hint for this word. We will update it very soon.'
+            }
+            if (def.length > 0) {
+              selectedHint = def
+            }
+          })
+        }
 
         if (currentState === 'start') {
           for (const i of 'abcdefghijklmnopqrstuvwxyz') {
