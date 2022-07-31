@@ -2,7 +2,7 @@
 ## The classical hangman puzzle game.
 We have to figure out which is the secret word before the man gets hanged. With each error, the man will be closer to die!
 
-Try out live demo on [Netlify](https://wordfindplay.netlify.app/) or [Github Pages](https://mhamid49.github.io/Guess-the-Word-Javascript-Game/)
+Try out live demo on [Netlify](https://whatword.netlify.app/) or [Github Pages](https://mhamid49.github.io/Guess-the-Word-Javascript-Game/)
 
 ### Libraries and Resources
 * RequireJS
