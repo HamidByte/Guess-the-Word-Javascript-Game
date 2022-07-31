@@ -740,5 +740,6 @@ define(["jquery"], function($) {
             hint: '',
         },
     ]
+
     return data
 })

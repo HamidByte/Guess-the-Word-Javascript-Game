@@ -29,7 +29,7 @@ const popupMsgElem = document.querySelector('.popup-msg');
 const showAnswerElem = document.querySelector('.show-answer');
 const playAgainButton = document.querySelector('.play-again');
 
-define(["jquery", "fetch", "methods"], function($, dataset, methods) {
+define(["jquery", "fetch", "methods", "api"], function($, dataset, methods, api) {
     // Test Dataset
     // const dataset = new Map([
     //     ['test', 'a procedure intended to establish the quality, performance, or reliability of something, especially before it is taken into widespread use.'],
@@ -88,13 +88,23 @@ define(["jquery", "fetch", "methods"], function($, dataset, methods) {
         health = maxChance
         mistakes = 0
         currentScore = 0
-        if(!previousResult) {
+        if (!previousResult) {
             totalScore = 0
         }
         methods.display(WordLengthElem, wordLength)
         methods.display(scoreElem, totalScore)
 
         console.log(selectedWord) //
+
+        api.getDictApiData(selectedWord).then(def => {
+          if(def === undefined) {
+            selectedHint = 'Sorry, there is no hint for this word. We will update it very soon.'
+          }
+
+          if (selectedHint === '' && def.length > 0) {
+            selectedHint = def
+          }
+        })
 
         if (currentState === 'start') {
           for (const i of 'abcdefghijklmnopqrstuvwxyz') {
