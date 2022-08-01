@@ -1,7 +1,7 @@
 /*
 Keywords:
 Javascript Game, Hangman, Word, Find, Guess, Fill, Complete, Solve, Play, IQ, Puzzle
-Word Scrabble, Scrab Word, Wordle
+Word Clue, Crossword Solver, Missing Letters, Word Scrabble, Scrab Word, Wordle
 
 Description: Fill in the blanks to complete word
 */
@@ -273,7 +273,7 @@ const showNotif = function (msg) {
 
   // Listening to physical keyboard's button press
   document.addEventListener("keydown", (event) => {
-    if(methods.lettersOnly(event) && popupContainerElem.classList.contains('hidden')) {
+    if(methods.lettersOnly(event) && popupContainerElem.classList.contains('hidden') && !$('#' + event.key.toUpperCase()).hasClass('disabled')) {
         // console.log(event.key.toUpperCase())
         $("#" + event.key.toUpperCase()).click()
     }
