@@ -13,6 +13,7 @@ Try out live demo on [Netlify](https://whatword.netlify.app/) or [Github Pages](
 - popper.js
 - Bootstrap 5
 - Font Awesome
+- Dictionary API [URL](https://dictionaryapi.dev/)
 
 ### How to use
 
